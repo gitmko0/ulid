@@ -168,14 +168,15 @@ func parse(v []byte, strict bool, id *ULID) error {
 			dec[v[15]] == 0xFF ||
 			dec[v[16]] == 0xFF ||
 			dec[v[17]] == 0xFF ||
-			dec[v[18]] == 0xFF ||
-			dec[v[19]] == 0xFF ||
-			dec[v[20]] == 0xFF ||
-			dec[v[21]] == 0xFF ||
-			dec[v[22]] == 0xFF ||
-			dec[v[23]] == 0xFF ||
-			dec[v[24]] == 0xFF ||
-			dec[v[25]] == 0xFF) {
+			//dec[v[18]] == 0xFF ||
+		 	dec[v[18]] == 0xFF) {
+			//dec[v[19]] == 0xFF ||
+			//dec[v[20]] == 0xFF ||
+			//dec[v[21]] == 0xFF ||
+			//dec[v[22]] == 0xFF ||
+			//dec[v[23]] == 0xFF ||
+			//dec[v[24]] == 0xFF ||
+			//dec[v[25]] == 0xFF) {
 		return ErrInvalidCharacters
 	}
 
@@ -199,17 +200,24 @@ func parse(v []byte, strict bool, id *ULID) error {
 	(*id)[4] = (dec[v[6]] << 7) | (dec[v[7]] << 2) | (dec[v[8]] >> 3)
 	(*id)[5] = (dec[v[8]] << 5) | dec[v[9]]
 
-	// 10 bytes of entropy (80 bits)
+	// 6 bytes of entropy (48 bits)
+	(*id)[6] = (dec[v[10]] << 3) | (dec[v[11]] << 1) | (dec[v[12]] >> 4)
+	(*id)[7] = (dec[v[12]] << 6) | (dec[v[13]] >> 2) 
+	(*id)[8] = (dec[v[13]] << 4) | (dec[v[14]] >> 2) | (dec[v[15]] >> 3)
+	(*id)[9] = (dec[v[15]] << 7) | (dec[v[16]] << 1) 
+	(*id)[10] = (dec[v[16]] << 5) | (dec[v[17]] << 2) | (dec[v[18]] >> 2)
+	/*
 	(*id)[6] = (dec[v[10]] << 3) | (dec[v[11]] >> 2)
 	(*id)[7] = (dec[v[11]] << 6) | (dec[v[12]] << 1) | (dec[v[13]] >> 4)
 	(*id)[8] = (dec[v[13]] << 4) | (dec[v[14]] >> 1)
 	(*id)[9] = (dec[v[14]] << 7) | (dec[v[15]] << 2) | (dec[v[16]] >> 3)
 	(*id)[10] = (dec[v[16]] << 5) | dec[v[17]]
-	(*id)[11] = (dec[v[18]] << 3) | dec[v[19]]>>2
-	(*id)[12] = (dec[v[19]] << 6) | (dec[v[20]] << 1) | (dec[v[21]] >> 4)
-	(*id)[13] = (dec[v[21]] << 4) | (dec[v[22]] >> 1)
-	(*id)[14] = (dec[v[22]] << 7) | (dec[v[23]] << 2) | (dec[v[24]] >> 3)
-	(*id)[15] = (dec[v[24]] << 5) | dec[v[25]]
+*/
+	//(*id)[11] = (dec[v[18]] << 3) | dec[v[19]]>>2
+	//(*id)[12] = (dec[v[19]] << 6) | (dec[v[20]] << 1) | (dec[v[21]] >> 4)
+	//(*id)[13] = (dec[v[21]] << 4) | (dec[v[22]] >> 1)
+	//(*id)[14] = (dec[v[22]] << 7) | (dec[v[23]] << 2) | (dec[v[24]] >> 3)
+	//(*id)[15] = (dec[v[24]] << 5) | dec[v[25]]
 
 	return nil
 }
