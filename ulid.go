@@ -328,6 +328,7 @@ func (id ULID) MarshalTextTo(dst []byte) error {
 	dst[16] = Encoding[((id[9]&3)<<3)|((id[10]&224)>>5)]
 	dst[17] = Encoding[id[10]&31]
 	dst[18] = Encoding[(id[11]&248)>>3]
+/*
 	dst[19] = Encoding[((id[11]&7)<<2)|((id[12]&192)>>6)]
 	dst[20] = Encoding[(id[12]&62)>>1]
 	dst[21] = Encoding[((id[12]&1)<<4)|((id[13]&240)>>4)]
@@ -335,7 +336,7 @@ func (id ULID) MarshalTextTo(dst []byte) error {
 	dst[23] = Encoding[(id[14]&124)>>2]
 	dst[24] = Encoding[((id[14]&3)<<3)|((id[15]&224)>>5)]
 	dst[25] = Encoding[id[15]&31]
-
+*/
 	return nil
 }
 
