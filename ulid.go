@@ -44,7 +44,7 @@ An ULID is a 16 byte Universally Unique Lexicographically Sortable Identifier
 	|                       32_bit_uint_random                      |
 	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 */
-type ULID [16]byte
+type ULID [12]byte
 
 var (
 	// ErrDataSize is returned when parsing or unmarshaling ULIDs with the wrong
@@ -363,7 +363,7 @@ var dec = [...]byte{
 }
 
 // EncodedSize is the length of a text encoded ULID.
-const EncodedSize = 26
+const EncodedSize = 19
 
 // UnmarshalText implements the encoding.TextUnmarshaler interface by
 // parsing the data as string encoded ULID.
